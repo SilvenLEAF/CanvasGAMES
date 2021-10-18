@@ -8,7 +8,7 @@ canvas.height = innerHeight;
 
 
 // __________Game Zone
-const player = new Player(innerWidth / 2, innerHeight / 2, 30, '#aa0');
+const player = new Player(innerWidth / 2, innerHeight / 2, 30, '#fff');
 
 
 const projectiles: Projectile[] = [];
@@ -40,7 +40,7 @@ function enemiesAppear() {
       y = randomBool() ? 0 - radius : canvas.height + radius;
 
     }
-    const cols = ['#500', '#050', '#005']
+    const cols = ['#f00', '#0f0', '#00f']
     const color = cols[getRandom(cols.length)];
     const angle = Math.atan2(canvas.height / 2 - y, canvas.width / 2 - x);
     const velocity = {
@@ -56,7 +56,11 @@ function enemiesAppear() {
 let animationId: number;
 function animate() {
   animationId = requestAnimationFrame(animate);
-  c.clearRect(0, 0, canvas.width, canvas.height);
+  // c.clearRect(0, 0, canvas.width, canvas.height); // clears with giving White background
+  
+  // fade effect and colorful background
+  c.fillStyle = 'rgba(0,0,0,0.1)';
+  c.fillRect(0, 0, canvas.width, canvas.height);
 
   player.draw();
   projectiles.forEach((p, pIndex) => {
