@@ -8,7 +8,7 @@ canvas.height = innerHeight;
 
 
 // __________Game Zone
-const player = new Player(innerWidth / 2, innerHeight / 2, 30, '#fff');
+const player = new Player(innerWidth / 2, innerHeight / 2, 10, '#fff');
 
 
 const projectiles: Projectile[] = [];
@@ -17,10 +17,10 @@ addEventListener('click', (e) => {
   // to get distance between two points always "Destination" - "Current Location"
   const angle = Math.atan2(e.clientY - canvas.height / 2, e.clientX - canvas.width / 2)
   const velocity = {
-    x: Math.cos(angle),
-    y: Math.sin(angle),
+    x: Math.cos(angle) * 5,
+    y: Math.sin(angle) * 5,
   }
-  projectiles.push(new Projectile(canvas.width / 2, canvas.height / 2, 5, '#f00', velocity))
+  projectiles.push(new Projectile(canvas.width / 2, canvas.height / 2, 5, '#fff', velocity))
 })
 
 
@@ -40,8 +40,7 @@ function enemiesAppear() {
       y = randomBool() ? 0 - radius : canvas.height + radius;
 
     }
-    const cols = ['#f00', '#0f0', '#00f']
-    const color = cols[getRandom(cols.length)];
+    const color = `hsl(${ getRandom(360)}, 50%, 50%)`;
     const angle = Math.atan2(canvas.height / 2 - y, canvas.width / 2 - x);
     const velocity = {
       x: Math.cos(angle),
