@@ -13,10 +13,13 @@
       font-family: sans-serif;
     }
   </style>
-  <script src="./dist/app.js" defer></script>
+  <script src="./dist/app-bundle.js" type="module" defer></script>
 </head>
 <body>
-  <h1 style="text-align: center">Shooter Game</h1>
   <canvas id="gameGround"></canvas>
+
+  <script>
+    const exports = {}
+  </script>
 </body>
 </html>
