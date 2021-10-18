@@ -59,8 +59,15 @@ function animate() {
   c.clearRect(0, 0, canvas.width, canvas.height);
 
   player.draw();
-  projectiles.forEach(p => {
+  projectiles.forEach((p, pIndex) => {
     p.update();
+
+    // remove if gone out of game zone
+    if (p.x + p.radius < 0 || p.x - p.radius > canvas.width || p.y + p.radius < 0 || p.y - p.radius > canvas.height) {
+      setTimeout(() => {
+        projectiles.slice(pIndex, 1);
+      }, 0);
+    }
   })
   enemies.forEach((e, eIndex) => {
     e.update();

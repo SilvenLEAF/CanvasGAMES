@@ -17,7 +17,6 @@ export class Player {
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
     c.fill();
-    console.log('DRAWN')
   }
 
 }
@@ -38,7 +37,6 @@ export class Enemy {
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
     c.fill();
-    console.log('DRAWN')
   }
 
   update() {
@@ -64,7 +62,6 @@ export class Projectile {
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
     c.fill();
-    console.log('DRAWN')
   }
 
   update() {
