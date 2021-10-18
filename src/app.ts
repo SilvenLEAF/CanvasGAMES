@@ -40,7 +40,7 @@ function enemiesAppear() {
       y = randomBool() ? 0 - radius : canvas.height + radius;
 
     }
-    const color = `hsl(${ getRandom(360)}, 50%, 50%)`;
+    const color = `hsl(${getRandom(360)}, 50%, 50%)`;
     const angle = Math.atan2(canvas.height / 2 - y, canvas.width / 2 - x);
     const velocity = {
       x: Math.cos(angle),
@@ -56,7 +56,7 @@ let animationId: number;
 function animate() {
   animationId = requestAnimationFrame(animate);
   // c.clearRect(0, 0, canvas.width, canvas.height); // clears with giving White background
-  
+
   // fade effect and colorful background
   c.fillStyle = 'rgba(0,0,0,0.1)';
   c.fillRect(0, 0, canvas.width, canvas.height);
@@ -87,10 +87,19 @@ function animate() {
 
       // shooting off the enemy
       if (dist - p.radius - e.radius < 1) {
-        setTimeout(() => {
-          enemies.splice(eIndex, 1);
-          projectiles.splice(pIndex, 1);
-        }, 0);
+
+        if (e.radius - 10 > 10) {
+          e.radius -= 10;
+          setTimeout(() => {
+            projectiles.splice(pIndex, 1);
+          }, 0);
+        } else {
+          setTimeout(() => {
+            enemies.splice(eIndex, 1);
+            projectiles.splice(pIndex, 1);
+          }, 0);
+
+        }
       }
 
     })
