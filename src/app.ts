@@ -30,15 +30,15 @@ function enemiesAppear() {
     let x: number, y: number;
 
     if (randomBool()) {
-    
+
       x = randomBool() ? 0 - radius : canvas.width + radius;
       y = getRandom(canvas.height);
-    
+
     } else {
-    
+
       x = getRandom(canvas.width);
       y = randomBool() ? 0 - radius : canvas.height + radius;
-    
+
     }
     const cols = ['#500', '#050', '#005']
     const color = cols[getRandom(cols.length)];
@@ -53,17 +53,37 @@ function enemiesAppear() {
   }, 2000)
 }
 
-
+let animationId: number;
 function animate() {
-  requestAnimationFrame(animate);
+  animationId = requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
 
   player.draw();
   projectiles.forEach(p => {
     p.update();
   })
-  enemies.forEach(e => {
+  enemies.forEach((e, eIndex) => {
     e.update();
+
+    // game over
+    const dist = Math.hypot(player.x - e.x, player.y - e.y);
+    if (dist - player.radius - e.radius < 1) {
+      cancelAnimationFrame(animationId)
+    }
+
+    // for each enemy, check if hit byt any projectile
+    projectiles.forEach((p, pIndex) => {
+      const dist = Math.hypot(p.x - e.x, p.y - e.y);
+
+      // shooting off the enemy
+      if (dist - p.radius - e.radius < 1) {
+        setTimeout(() => {
+          enemies.splice(eIndex, 1);
+          projectiles.splice(pIndex, 1);
+        }, 0);
+      }
+
+    })
   })
 }
 animate();
